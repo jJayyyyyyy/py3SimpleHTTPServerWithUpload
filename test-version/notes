@@ -1,0 +1,75 @@
+'''
+# yuan po de ji ge wen ti
+#   python2.7   not   python3
+#   encoding and decoding
+#   html hun luan, yi ji qi ta yi xie xi jie
+
+# 1. remove StringIO type, BytesIO type, remove copyfile()
+#   and directly write str-encoded bytes into wfile using wfile.write('hello'.encode('utf-8'))
+
+
+# 2. POST
+# def do_POST(self):
+#     print(self.rfile.readline().decode('utf-8'))
+#     print(self.rfile.readline().decode('utf-8'))
+#     print(self.rfile.readline().decode('utf-8'))
+#     print(self.rfile.readline().decode('utf-8'))
+#     print(self.rfile.readline().decode('utf-8'))
+#     print(self.rfile.readline().decode('utf-8'))
+#     print(self.rfile.readline().decode('utf-8'))
+#     print(self.rfile.readline().decode('utf-8'))
+
+
+Client posted a file named <1.txt> with one-line content "test".
+And the result is as below
+
+Serving HTTP on 0.0.0.0 port 8000 ...
+------WebKitFormBoundaryy4v6ghj3RbdpoOnY
+
+Content-Disposition: form-data; name="file"; filename="1.txt"
+
+Content-Type: text/plain
+
+
+
+test
+
+
+
+------WebKitFormBoundaryy4v6ghj3RbdpoOnY--
+
+
+We can see that there is a pair of boundaries <------WebKitFormBoundary***>, in the middle of which are the post headers and contents.
+
+
+        # with open('postdata', 'wb') as f:
+        #     f.write(self.rfile)
+        # print(self.headers["Content-Type"])
+        # print(self.headers["Cache-Control"])
+        # print(self.headers["Content-Length"])
+
+
+        # print(self.rfile.readline().decode('utf-8'))
+        # print(self.rfile.readline().decode('utf-8'))
+        # print(self.rfile.readline().decode('utf-8'))
+        # print(self.rfile.readline().decode('utf-8'))
+        # print(self.rfile.readline().decode('utf-8'))
+        # print(self.rfile.readline().decode('utf-8'))
+        # print(self.rfile.readline().decode('utf-8'))
+
+        # self.send_response(200)
+        # self.wfile.write(b'ok')
+
+
+
+
+status
+headers
+contents2
+
+
+list overflow
+length = len(f.encode('utf-8'))
+Content-Length is in byte
+'''
+
