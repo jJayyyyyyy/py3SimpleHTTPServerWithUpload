@@ -112,6 +112,10 @@ $ python3 py3SimpleHTTPServerWithUpload.py
 
 *	更多内容请看[这篇博客](https://jjayyyyyyy.github.io/2016/10/07/reWrite_SimpleHTTPServerWithUpload_with_python3.html)
 
+*	原项目地址: https://github.com/jJayyyyyyy/cs/tree/master/just%20for%20fun/file_transfer/http
+
+	现在独立成为一个 `repo`, 方便查找和使用, 也便于维护和升级
+
 *	TODO
 
 	*	步骤：如何安装自己写的模块
