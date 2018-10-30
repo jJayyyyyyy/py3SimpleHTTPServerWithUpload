@@ -12,7 +12,21 @@ $ python3 py3SimpleHTTPServerWithUpload.py
 
 *	确定边界
 
-	如果上传两个文件, 则在 `HTTP headers` 之后是这样的 `POST data`
+	假设有文件 `file1.txt`, 其内容如下
+
+	```
+	content in file1
+	hello file1
+	```
+
+	和 `file2.txt`, 其内容如下
+	
+	```
+	content in file2
+	hello file2
+	```
+
+	如果上传这两个文件, 则在 `HTTP headers` 之后是这样的 `POST data`
 
 	```
 	------WebKitFormBoundaryLVlRNkjiiJLtNYQE
@@ -21,7 +35,6 @@ $ python3 py3SimpleHTTPServerWithUpload.py
 
 	content in file1
 	hello file1
-
 	------WebKitFormBoundaryLVlRNkjiiJLtNYQE
 	Content-Disposition: form-data; name="file"; filename="file2.txt"
 	Content-Type: text/plain
