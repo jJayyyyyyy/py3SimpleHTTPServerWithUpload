@@ -1,10 +1,12 @@
 ##	Usage:
 
 ```bash
-$ python3 py3SimpleHTTPServerWithUpload.py
+$ python3 py3SimpleHTTPServerWithUpload.py [port]
 ````
 
-然后在浏览器输入 `http://[ip]:8000` 就能上传或者下载文件了。注意把 `[ip]` 换成你的局域网 `ip` 地址。
+然后在浏览器输入 `http://[ip]:[port]`, 其中 `port` 默认是 `8000`, 就能上传或者下载文件了。注意把 `[ip]` 换成 `server` 的局域网 `ip` 地址。
+
+注: 本模块仅作为局域网内小文件共享的工具, 不建议长时间在后台运行.
 
 <br>
 
@@ -20,7 +22,7 @@ $ python3 py3SimpleHTTPServerWithUpload.py
 	```
 
 	和 `file2.txt`, 其内容如下
-	
+
 	```
 	content in file2
 	hello file2
@@ -113,6 +115,8 @@ $ python3 py3SimpleHTTPServerWithUpload.py
 
 *	文件夹 `./py2_SimpleHTTPServerWithUpload/` 中存放的是基于 `python2.7` 的模块，在此感谢 [bones7456](http://luy.li/2010/05/15/simplehttpserverwithupload/) 同学和 [BUPTGuo](http://buptguo.com/2015/11/07/simplehttpserver-with-upload-file/) 同学的成果。
 
+	注意, 最好用完就退出程序, 而不要一直启动, 以防
+
 *	由于 `python2.7` 和 `Python3.4` 有较多不同特性，原来的程序不能直接在 `python3.4` 的环境中运行，因此我根据以上两位同学的思路，进行了部分重写，制作了基于 `python3.4` 的模块。主要改动如下：
 
 	*	移除了 `StringIO`，不使用 `copyfile()`
@@ -132,7 +136,6 @@ $ python3 py3SimpleHTTPServerWithUpload.py
 *	TODO
 
 	*	步骤：如何安装自己写的模块
-	*	单独建立一个 `repo`, 方便查找和使用本模块
 	*	更新博客
 
 	<br>
@@ -158,3 +161,7 @@ $ python3 py3SimpleHTTPServerWithUpload.py
 	*	修复博文链接
 
 	*	把空格换成了 `tab`, `4 space = 1 tab`
+
+*	20181030
+
+	*	根据 @`Liu William` 同学的建议, 增加了 `port` 参数

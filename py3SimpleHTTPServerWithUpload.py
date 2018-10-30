@@ -30,6 +30,7 @@ import cgi
 import shutil
 import mimetypes
 import re
+import sys
 
 class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
@@ -317,9 +318,11 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 		})
 
 
-def test(HandlerClass = SimpleHTTPRequestHandler,
-		 ServerClass = http.server.HTTPServer):
-	http.server.test(HandlerClass, ServerClass)
+def test(HandlerClass = SimpleHTTPRequestHandler, ServerClass = http.server.HTTPServer):
+	port = 8000
+	if len(sys.argv) == 2:
+		port = int(sys.argv[1])
+	http.server.test(HandlerClass, ServerClass, port=port)
 
 if __name__ == '__main__':
 	test()
