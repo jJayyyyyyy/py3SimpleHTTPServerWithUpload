@@ -120,7 +120,6 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 
 		while loop_info == outer:
 			# print(line)
-			line = line
 			if line != boundary_begin:
 				return_status = False
 				return_info += "Content NOT begin with boundary\n"
@@ -139,7 +138,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 				break
 			path = self.translate_path(self.path)
 			filename = os.path.join(path, filename)
-			# if filename alread exists
+			# if filename already exists
 			if os.path.exists(filename):
 				filename += "_copy"
 
