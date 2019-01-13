@@ -10,6 +10,8 @@ Python3-Version by [FrozenMap]:
 20181029 Update:
 With the help of [a.7], we can now upload multiple files together, rather than one file at a time
 
+20190113 Update:
+Fix the rule to handle multiple duplicated filenames.
 
 More details can be found on the blog with the link below:
 https://jjayyyyyyy.github.io/2016/10/07/reWrite_SimpleHTTPServerWithUpload_with_python3.html
@@ -130,7 +132,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 			line = self.rfile.readline().decode('utf-8').rstrip('\r\n')
 			# print(line)
 			filename = re.findall(r'filename="(.*)"', line)[0]
-			# print(filename)
+			name = filename
 			if not filename:
 				return_status = False
 				return_info += "Can't find out file name...\n"
@@ -139,8 +141,14 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 			path = self.translate_path(self.path)
 			filename = os.path.join(path, filename)
 			# if filename already exists
-			if os.path.exists(filename):
-				filename += "_copy"
+			dup_cnt = 1
+			while os.path.exists(filename):
+				dot = name.rfind('.')
+				prefix = name[:dot]
+				suffix = name[dot:]
+				filename = prefix + "_%d" % dup_cnt + suffix
+				filename = os.path.join(path, filename)
+				dup_cnt += 1
 
 			# second line
 			# b'Content-Type: text/plain'

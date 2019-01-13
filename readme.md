@@ -165,3 +165,11 @@ $ python3 py3SimpleHTTPServerWithUpload.py [port]
 *	20181030
 
 	*	根据 @`Liu William` 同学的建议, 增加了 `port` 参数
+
+*	20190113
+
+	*	根据 @`YLXDXX` 同学的反馈, 原来的程序在连续上传多个相同名字的文件时, 会覆盖之前的文件, 现已修复, 新的命名规则如下(假设待上传文件的名字是 `readme.md` )
+
+		*	如果文件名不存在, 则保存为 `readme.md`
+
+		*	如果已经存在 `readme.md` 文件, 则新文件命名为 `readme_1.md`. 如果已经存在 `readme_1.md`, 则命名为 `readme_2.md`, 依次类推.
