@@ -13,9 +13,15 @@ With the help of [a.7], we can now upload multiple files together, rather than o
 20190113 Update:
 Fix the rule to handle multiple duplicated filenames.
 
-More details can be found on the blog with the link below:
-https://jjayyyyyyy.github.io/2016/10/07/reWrite_SimpleHTTPServerWithUpload_with_python3.html
+20190128 Update:
+With the help of [a.7] and [xmq], we have fixed a bug that will generate extra two bytes in the newly uploaded file.
 
+In addition, we now have a buffer to store the uploaded data and write into file every 1024 Bytes, instead of the former line by line method.
+
+More details can be found on the blog with the link below:
+https://github.com/jJayyyyyyy/py3SimpleHTTPServerWithUpload
+
+https://jjayyyyyyy.github.io/2016/10/07/reWrite_SimpleHTTPServerWithUpload_with_python3.html
 """
 
 __version__ = "0.4"
@@ -171,13 +177,16 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 							break
 						elif line == boundary_end:
 							loop_info = leave
-							buf = buf[:-2]
-							f.write(buf)
+							# post 数据的实际内容, 在 boundary_end 之前那一行就已经结束了
+							# 而这一行数据后面紧跟的 '\r\n' 只是为了区分接下来的 boundary_end
+							# 因此在把数据写如文件的时候, 要把这个多余的 '\r\n' 去掉
+							f.write(buf[:-2])
 							break
 						else:
-							# line 还是二进制形式, realine() 不会删掉二进制的'\n'
-							f.write(buf)
-							buf = line
+							if len(buf) > 1024:
+								f.write(buf)
+								buf = b''
+							buf += line
 			except Exception as e:
 				loop_info = leave
 				return_status = False
