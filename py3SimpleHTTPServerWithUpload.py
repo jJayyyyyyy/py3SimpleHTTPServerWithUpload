@@ -162,21 +162,22 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 			loop_info = inner
 			# POST data
 			try:
+				buf = b''
 				with open(filename, 'wb') as f:
 					while loop_info == inner:
 						line = self.rfile.readline()
-						# print(line)
 						if line == boundary_begin:
 							loop_info = outer
-							# print('out')
 							break
 						elif line == boundary_end:
-							# print('leave')
 							loop_info = leave
+							buf = buf[:-2]
+							f.write(buf)
 							break
 						else:
 							# line 还是二进制形式, realine() 不会删掉二进制的'\n'
-							f.write(line)
+							f.write(buf)
+							buf = line
 			except Exception as e:
 				loop_info = leave
 				return_status = False
