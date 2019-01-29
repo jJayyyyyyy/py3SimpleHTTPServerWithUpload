@@ -174,6 +174,7 @@ class SimpleHTTPRequestHandler(http.server.BaseHTTPRequestHandler):
 						line = self.rfile.readline()
 						if line == boundary_begin:
 							loop_info = outer
+							f.write(buf[:-2])
 							break
 						elif line == boundary_end:
 							loop_info = leave
