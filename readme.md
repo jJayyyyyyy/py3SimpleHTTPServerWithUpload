@@ -183,3 +183,11 @@ $ python3 py3SimpleHTTPServerWithUpload.py [port]
 	*	感谢 @`xmq` 同学的测试
 
 	*	更新注释, 更新 `readme`
+
+*	20211127
+
+	Merge pull request #3 from seiuneko/patch-1
+
+	From the [Python Documentation](https://docs.python.org/3.5/library/cgi.html#cgi.escape) we know that `cgi.escape()` has been deprecated and `html.escape()` should be used instead.
+
+	Good Job and thank you @`seiuneko` for you PR.
